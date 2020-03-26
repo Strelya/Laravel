@@ -12,5 +12,19 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+
+    $short_codes = \App\Link::inRandomOrder()->limit(5)->pluck('short_code');//value('short_code');//->get();//;
+
+//    dd($short_codes);
+    return view('welcome', ['short_codes' => $short_codes]);
+});
+
+
+Route::get('/r/{code}', function ($code) {
+
+    $link = \App\Link::where('short_code', $code)->value('source_link');
+//    dd($link);
+
+    return redirect($link);
+//    return view('welcome');
 });
