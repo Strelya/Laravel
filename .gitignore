@@ -1,4 +1,5 @@
 /.idea
+/resources/GeoLite2
 /vendor
 .env
 .env.backup
