@@ -32,7 +32,7 @@ Route::get('/r/{code}', function ($code) {
         $record = $reader->city(request()->ip());
     }
     catch (\GeoIp2\Exception\AddressNotFoundException $exception) {
-        $record = $reader->city('88.214.10.164');
+        $record = $reader->city(env('DEFAULT_IP_ADDR'));
     }
 
     $statistic = new \App\Statistic();
