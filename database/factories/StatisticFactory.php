@@ -12,16 +12,20 @@ function get_name($cc) {
 
 $factory->define(\App\Statistic::class, function (Faker $faker) {
     $country_code = $faker->countryCode;
+    $userAgent = $faker->userAgent;
     $country = get_name($country_code);
+    $parser = new WhichBrowser\Parser($userAgent);
     return [
         'id' => $faker->uuid,
         'link_id' => \App\Link::inRandomOrder()->limit(1)->get()->first()->id,
         'ip' => $faker->ipv4,
-//        'country_name' => $faker->country,
         'country_name' => $country,
         'country_code' => $country_code,
-//        'country_code' => $faker->countryCode,
         'city_name' => $faker->city,
-        'user_agent' => $faker->userAgent,
+        'device' => $parser->device->type,
+        'os' => $parser->os->toString(),
+        'engine' => $parser->engine->toString(),
+        'browser' => $parser->browser->toString(),
+        'user_agent' => $userAgent,
     ];
 });
