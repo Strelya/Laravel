@@ -35,6 +35,8 @@ Route::get('/r/{code}', function ($code) {
         $record = $reader->city(env('DEFAULT_IP_ADDR'));
     }
 
+    $parser = new WhichBrowser\Parser(request()->userAgent());
+
     $statistic = new \App\Statistic();
     $statistic->id = \Ramsey\Uuid\Uuid::uuid4()->toString();
     $statistic->link_id = $link->id;
@@ -43,6 +45,10 @@ Route::get('/r/{code}', function ($code) {
     $statistic->country_name = $record->country->name;
     $statistic->country_code = $record->country->isoCode;
     $statistic->city_name = $record->city->name;
+    $statistic->browser = $parser->browser->toString();
+    $statistic->engine = $parser->engine->toString();
+    $statistic->os = $parser->os->toString();
+    $statistic->device = $parser->device->type;
     $statistic->save();
 
 //    dd($statistic);
