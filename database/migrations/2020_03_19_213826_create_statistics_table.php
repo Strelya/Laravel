@@ -19,9 +19,9 @@ class CreateStatisticsTable extends Migration
             $table->uuid('id');
             $table->unsignedBigInteger('link_id');
             $table->string('ip', 255);
-            $table->string('country_name', 255);
-            $table->string('country_code', 2);
-            $table->string('city_name', 255);
+            $table->string('country_name', 255)->nullable();
+            $table->string('country_code', 2)->nullable();
+            $table->string('city_name', 255)->nullable();
             $table->string('user_agent', 255);
             $table->timestamps();
             $table->softDeletes();

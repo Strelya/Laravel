@@ -33,7 +33,22 @@ Route::get('/r/{code}', function ($code) {
     }
     catch (\GeoIp2\Exception\AddressNotFoundException $exception) {
         $record = $reader->city(env('DEFAULT_IP_ADDR'));
+    } finally {
+        $city = $record->city->name;
+        $country_name = $record->country->name;
+        $country_code = $record->country->isoCode;
     }
+
+//    $result = file_get_contents('http://ip-api.com/json/' . \request()->ip());
+//    $data = json_decode($result, true);
+//
+//    if ($data['status'] == 'fail') {
+//        $result = file_get_contents('http://ip-api.com/json' . env('DEFAULT_IP_ADDR'));
+//        $data = json_decode($result, true);
+//        $city = $data['city'];
+//        $country_name = $data['country'];
+//        $country_code = $data['countryCode'];
+//    }
 
     $parser = new WhichBrowser\Parser(request()->userAgent());
 
@@ -42,9 +57,9 @@ Route::get('/r/{code}', function ($code) {
     $statistic->link_id = $link->id;
     $statistic->ip = request()->ip();
     $statistic->user_agent = request()->userAgent();
-    $statistic->country_name = $record->country->name;
-    $statistic->country_code = $record->country->isoCode;
-    $statistic->city_name = $record->city->name;
+    $statistic->country_name = $country_name;
+    $statistic->country_code = $country_code;
+    $statistic->city_name = $city;
     $statistic->browser = $parser->browser->toString();
     $statistic->engine = $parser->engine->toString();
     $statistic->os = $parser->os->toString();

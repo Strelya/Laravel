@@ -29,10 +29,7 @@ class UpdateStatistisTable extends Migration
     public function down()
     {
         Schema::table('statistics', function (Blueprint $table) {
-            $table->dropColumn('browser');
-            $table->dropColumn('engine');
-            $table->dropColumn('os');
-            $table->dropColumn('device');
+            $table->dropColumn('browser', 'engine', 'os', 'device');
         });
     }
 }
