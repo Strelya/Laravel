@@ -4,7 +4,7 @@
 namespace App;
 
 
-class MaxmindAdapter implements AdapterInterface
+class MaxmindAdapter implements IpAdapterInterface
 {
 
     protected $reader;

@@ -4,7 +4,7 @@
 namespace App;
 
 
-interface AdapterInterface
+interface IpAdapterInterface
 {
     public function parse(string $ip);
 

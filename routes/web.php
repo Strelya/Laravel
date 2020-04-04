@@ -11,7 +11,7 @@
 |
 */
 
-App::singleton(\App\AdapterInterface::class, function () {
+App::singleton(\App\IpAdapterInterface::class, function () {
     $reader = new \GeoIp2\Database\Reader(resource_path() . '/GeoLite2/GeoLite2-City.mmdb');
     return new \App\MaxmindAdapter($reader);
 
@@ -26,7 +26,7 @@ Route::get('/', function () {
 });
 
 
-Route::get('/r/{code}', function ($code, \App\AdapterInterface $adapter) {
+Route::get('/r/{code}', function ($code, \App\IpAdapterInterface $adapter) {
 
     //dd($adapter);
 

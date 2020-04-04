@@ -4,7 +4,7 @@
 namespace App;
 
 
-class IpapiAdapter implements AdapterInterface
+class IpapiAdapter implements IpAdapterInterface
 {
     protected $data;
 
