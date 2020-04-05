@@ -19,6 +19,11 @@ App::singleton(\App\IpAdapterInterface::class, function () {
 
 });
 
+App::singleton(\App\UserAgentAdapterInterface::class, function () {
+
+    return new \App\WhichBrowserAdapter();
+});
+
 
 Route::get('/', function () {
     $short_codes = \App\Link::inRandomOrder()->limit(5)->pluck('short_code');
@@ -39,7 +44,7 @@ Route::get('/r/{code}', function ($code, \App\IpAdapterInterface $adapter) {
 
     $adapter->parse(request()->ip());
 
-    $parser = new WhichBrowser\Parser(request()->userAgent());
+//    $parser = new WhichBrowser\Parser(request()->userAgent());
 
     $statistic = new \App\Statistic();
     $statistic->id = \Ramsey\Uuid\Uuid::uuid4()->toString();

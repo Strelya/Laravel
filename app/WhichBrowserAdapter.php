@@ -15,21 +15,21 @@ class WhichBrowserAdapter implements UserAgentAdapterInterface
     }
     public function getBrowser()
     {
-        // TODO: Implement getBrowser() method.
+        return $browser_name = $this->data->browser->toString();
     }
 
     public function getEngine()
     {
-        // TODO: Implement getEngine() method.
+        return $engine = $this->data->engine->toString();
     }
 
     public function getOs()
     {
-        // TODO: Implement getOs() method.
+        return $os = $this->data->os->toString();
     }
 
     public function getDevice()
     {
-        // TODO: Implement getDevice() method.
+        return $device = $this->data->device->type;
     }
 }
