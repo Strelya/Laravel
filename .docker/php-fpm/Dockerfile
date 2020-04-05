@@ -9,6 +9,8 @@ RUN pecl install xdebug \
 
 RUN apt-get install -qq git curl libmcrypt-dev libjpeg-dev libpng-dev libfreetype6-dev libbz2-dev libzip-dev
 
+RUN apt-get install unzip
+
 RUN apt-get clean
 
 RUN docker-php-ext-install pdo_mysql zip

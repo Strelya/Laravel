@@ -59,3 +59,6 @@ Route::get('/r/{code}', function ($code, \App\IpAdapterInterface $adapter) {
     return redirect($link->source_link);
 
 });
+
+//todo: Роут на страницу опций, где переключать адаптеры, после авторизации
+//todo: На странице опций варианты авторизации - стандартная, гитхаб, Твиттер, Гугл
