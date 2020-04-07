@@ -11,8 +11,11 @@
 |
 */
 
+use GeoIp2\Database\Reader;
+use Illuminate\Support\Facades\App;
+
 App::singleton(\App\IpAdapterInterface::class, function () {
-    $reader = new \GeoIp2\Database\Reader(resource_path() . '/GeoLite2/GeoLite2-City.mmdb');
+    $reader = new Reader(resource_path() . '/GeoLite2/GeoLite2-City.mmdb');
     return new \App\MaxmindAdapter($reader);
 
 //    return new \App\IpapiAdapter();
@@ -21,7 +24,9 @@ App::singleton(\App\IpAdapterInterface::class, function () {
 
 App::singleton(\App\UserAgentAdapterInterface::class, function () {
 
-    return new \App\WhichBrowserAdapter();
+//    return new \App\WhichBrowserAdapter();
+
+    return new \App\UAparserAdapter();
 });
 
 
@@ -45,8 +50,6 @@ Route::get('/r/{code}', function ($code, \App\IpAdapterInterface $ipAdapter, \Ap
     $ipAdapter->parse(request()->ip());
     $UAadapter->parse(request()->userAgent());
 
-//    $parser = new WhichBrowser\Parser(request()->userAgent());
-
     $statistic = new \App\Statistic();
     $statistic->id = \Ramsey\Uuid\Uuid::uuid4()->toString();
     $statistic->link_id = $link->id;
@@ -59,10 +62,10 @@ Route::get('/r/{code}', function ($code, \App\IpAdapterInterface $ipAdapter, \Ap
     $statistic->engine = $UAadapter->getEngine();
     $statistic->os = $UAadapter->getOs();
     $statistic->device = $UAadapter->getDevice();
-    $statistic->save();
+//    $statistic->save();
 
-//    dd($statistic);
-    return redirect($link->source_link);
+    dd($statistic);
+//    return redirect($link->source_link);
 
 });
 

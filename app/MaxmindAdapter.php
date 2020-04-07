@@ -3,6 +3,8 @@
 
 namespace App;
 
+use GeoIp2\Database\Reader;
+use GeoIp2\Exception\AddressNotFoundException;
 
 class MaxmindAdapter implements IpAdapterInterface
 {
@@ -10,7 +12,7 @@ class MaxmindAdapter implements IpAdapterInterface
     protected $reader;
     protected $record;
 
-    public function __construct(\GeoIp2\Database\Reader $reader)
+    public function __construct(Reader $reader)
     {
         $this->reader = $reader;
     }
@@ -19,7 +21,7 @@ class MaxmindAdapter implements IpAdapterInterface
     {
         try {
             $this->record = $this->reader->city($ip);
-        } catch (\GeoIp2\Exception\AddressNotFoundException $exception) {
+        } catch (AddressNotFoundException $exception) {
             $this->record = $this->reader->city(env('DEFAULT_IP_ADDR'));
         }
     }
