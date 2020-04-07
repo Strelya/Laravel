@@ -25,8 +25,9 @@ App::singleton(\App\IpAdapterInterface::class, function () {
 App::singleton(\App\UserAgentAdapterInterface::class, function () {
 
 //    return new \App\WhichBrowserAdapter();
+//    return new \App\UAparserAdapter();
 
-    return new \App\UAparserAdapter();
+    return new \App\DonatjAdapter();
 });
 
 
@@ -49,6 +50,8 @@ Route::get('/r/{code}', function ($code, \App\IpAdapterInterface $ipAdapter, \Ap
 
     $ipAdapter->parse(request()->ip());
     $UAadapter->parse(request()->userAgent());
+
+//    dd($UAadapter);
 
     $statistic = new \App\Statistic();
     $statistic->id = \Ramsey\Uuid\Uuid::uuid4()->toString();

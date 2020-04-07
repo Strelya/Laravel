@@ -11,8 +11,8 @@ class UAparserAdapter implements UserAgentAdapterInterface
 
     public function parse(string $useragent) {
 
-        $parser = Parser::create();
-        $this->data = $parser->parse($useragent);
+        $result = Parser::create();
+        $this->data = $result->parse($useragent);
 
     }
     public function getBrowser()
@@ -22,7 +22,7 @@ class UAparserAdapter implements UserAgentAdapterInterface
 
     public function getEngine()
     {
-        return "Other_engine";
+        return "No_data";
     }
 
     public function getOs()
