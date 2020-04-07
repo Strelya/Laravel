@@ -25,8 +25,6 @@ App::singleton(\App\IpAdapterInterface::class, function () {
 App::singleton(\App\UserAgentAdapterInterface::class, function () {
 
 //    return new \App\WhichBrowserAdapter();
-//    return new \App\UAparserAdapter();// Не все данные
-//    return new \App\DonatjAdapter();// Не все данные
 
     return new \App\ZareiAdapter();
 });
