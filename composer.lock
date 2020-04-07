@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "74ce3d57b4cb8075638203cb83852d79",
+    "content-hash": "8ef2a3b4abeed1865b5a2858e4a02232",
     "packages": [
         {
             "name": "composer/ca-bundle",
@@ -3805,6 +3805,70 @@
                 "useragent"
             ],
             "time": "2020-02-12T10:54:23+00:00"
+        },
+        {
+            "name": "zarei/user-agent-parser",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/ymgsmz/UserAgentParser.git",
+                "reference": "62cbd932cd581cb0e2729d7172680cbd96cf8c8b"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/ymgsmz/UserAgentParser/zipball/62cbd932cd581cb0e2729d7172680cbd96cf8c8b",
+                "reference": "62cbd932cd581cb0e2729d7172680cbd96cf8c8b",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/support": ">=5.7",
+                "php": "^7.3"
+            },
+            "require-dev": {
+                "orchestra/testbench": "^4.0",
+                "php-coveralls/php-coveralls": "^2.1"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Zarei\\UserAgentParser\\UserAgentServiceProvider"
+                    ],
+                    "aliases": {
+                        "UserAgentParser": "Zarei\\UserAgentParser\\Facades\\UserAgentParser"
+                    }
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Zarei\\UserAgentParser\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Mahdi Zarei",
+                    "email": "ymgsmz@gmail.com"
+                }
+            ],
+            "description": "Get user's software and hardware information like Device, CPU, OS, Browser, Engine from user agent string",
+            "homepage": "https://github.com/ymgsmz/UserAgentParser",
+            "keywords": [
+                "browser",
+                "browser-engine",
+                "cpu-architecture",
+                "detector",
+                "device",
+                "laravel",
+                "operation-system",
+                "php",
+                "ua",
+                "user-agent"
+            ],
+            "time": "2019-09-20T08:16:44+00:00"
         }
     ],
     "packages-dev": [
@@ -5895,7 +5959,9 @@
     ],
     "aliases": [],
     "minimum-stability": "dev",
-    "stability-flags": [],
+    "stability-flags": {
+        "zarei/user-agent-parser": 20
+    },
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {

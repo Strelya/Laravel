@@ -25,9 +25,10 @@ App::singleton(\App\IpAdapterInterface::class, function () {
 App::singleton(\App\UserAgentAdapterInterface::class, function () {
 
 //    return new \App\WhichBrowserAdapter();
-//    return new \App\UAparserAdapter();
+//    return new \App\UAparserAdapter();// Не все данные
+//    return new \App\DonatjAdapter();// Не все данные
 
-    return new \App\DonatjAdapter();
+    return new \App\ZareiAdapter();
 });
 
 
@@ -39,8 +40,6 @@ Route::get('/', function () {
 
 Route::get('/r/{code}', function ($code, \App\IpAdapterInterface $ipAdapter, \App\UserAgentAdapterInterface $UAadapter) {
 
-//    dd($UAadapter);
-
     $link = \App\Link::where('short_code', $code)->get()->first();
 
     if($link === null)
@@ -50,8 +49,6 @@ Route::get('/r/{code}', function ($code, \App\IpAdapterInterface $ipAdapter, \Ap
 
     $ipAdapter->parse(request()->ip());
     $UAadapter->parse(request()->userAgent());
-
-//    dd($UAadapter);
 
     $statistic = new \App\Statistic();
     $statistic->id = \Ramsey\Uuid\Uuid::uuid4()->toString();
@@ -65,10 +62,10 @@ Route::get('/r/{code}', function ($code, \App\IpAdapterInterface $ipAdapter, \Ap
     $statistic->engine = $UAadapter->getEngine();
     $statistic->os = $UAadapter->getOs();
     $statistic->device = $UAadapter->getDevice();
-//    $statistic->save();
+    $statistic->save();
 
-    dd($statistic);
-//    return redirect($link->source_link);
+//    dd($statistic);
+    return redirect($link->source_link);
 
 });
 
