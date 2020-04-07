@@ -31,9 +31,9 @@ Route::get('/', function () {
 });
 
 
-Route::get('/r/{code}', function ($code, \App\IpAdapterInterface $adapter) {
+Route::get('/r/{code}', function ($code, \App\IpAdapterInterface $ipAdapter, \App\UserAgentAdapterInterface $UAadapter) {
 
-    //dd($adapter);
+//    dd($UAadapter);
 
     $link = \App\Link::where('short_code', $code)->get()->first();
 
@@ -42,7 +42,8 @@ Route::get('/r/{code}', function ($code, \App\IpAdapterInterface $adapter) {
         return redirect('/');
     }
 
-    $adapter->parse(request()->ip());
+    $ipAdapter->parse(request()->ip());
+    $UAadapter->parse(request()->userAgent());
 
 //    $parser = new WhichBrowser\Parser(request()->userAgent());
 
@@ -51,13 +52,13 @@ Route::get('/r/{code}', function ($code, \App\IpAdapterInterface $adapter) {
     $statistic->link_id = $link->id;
     $statistic->ip = request()->ip();
     $statistic->user_agent = request()->userAgent();
-    $statistic->country_name = $adapter->getCountryName();
-    $statistic->country_code = $adapter->getCountryCode();
-    $statistic->city_name = $adapter->getCityName();
-    $statistic->browser = $parser->browser->toString();
-    $statistic->engine = $parser->engine->toString();
-    $statistic->os = $parser->os->toString();
-    $statistic->device = $parser->device->type;
+    $statistic->country_name = $ipAdapter->getCountryName();
+    $statistic->country_code = $ipAdapter->getCountryCode();
+    $statistic->city_name = $ipAdapter->getCityName();
+    $statistic->browser = $UAadapter->getBrowser();
+    $statistic->engine = $UAadapter->getEngine();
+    $statistic->os = $UAadapter->getOs();
+    $statistic->device = $UAadapter->getDevice();
     $statistic->save();
 
 //    dd($statistic);
