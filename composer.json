@@ -14,6 +14,7 @@
         "geoip2/geoip2": "~2.0",
         "laravel/framework": "^6.2",
         "laravel/tinker": "^2.0",
+        "predis/predis": "^1.1",
         "whichbrowser/parser": "^2.0",
         "zarei/user-agent-parser": "dev-master"
     },

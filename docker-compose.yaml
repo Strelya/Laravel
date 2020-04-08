@@ -45,3 +45,11 @@ services:
       - mysql
     networks:
       - app
+
+  redis:
+    image: "redis:5.0.8"
+    networks:
+      - app
+    ports:
+    - 6379:6379
+    - 6380:6380
