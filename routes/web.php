@@ -35,6 +35,14 @@ Route::get('/', function () {
     return view('welcome', ['title' => 'Random Links', 'short_codes' => $short_codes]);
 });
 
+Route::get('/all_links', function () {
+    $short_codes = cache()->remember('all-short-link', 86400, function (){
+        return \App\Link::pluck('short_code');
+    });
+
+    return view('all_links', ['title' => 'All Links', 'short_codes' => $short_codes]);
+});
+
 
 Route::get('/r/{code}', function ($code, \App\IpAdapterInterface $ipAdapter, \App\UserAgentAdapterInterface $UAadapter) {
 

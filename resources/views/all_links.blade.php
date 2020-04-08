@@ -88,7 +88,6 @@
                     @foreach($short_codes as $short_code)
                         <a href="/r/{{ $short_code }}">{{ $short_code }}</a>
                     @endforeach
-                        <a href="/all_links">All Links</a>
                 </div>
             </div>
         </div>
