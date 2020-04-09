@@ -17,18 +17,16 @@ use Illuminate\Support\Facades\App;
 App::singleton(\App\IpAdapterInterface::class, function () {
     $reader = new Reader(resource_path() . '/GeoLite2/GeoLite2-City.mmdb');
     return new \App\MaxmindAdapter($reader);
-
 //    return new \App\IpapiAdapter();
-
 });
 
 App::singleton(\App\UserAgentAdapterInterface::class, function () {
-
 //    return new \App\WhichBrowserAdapter();
-
     return new \App\ZareiAdapter();
 });
 
+Route::get('/sign-up', '\App\Http\Controllers\SignUpController@index')->name('sign-up');
+Route::post('/sign-up', '\App\Http\Controllers\SignUpController@handle')->name('handle-sign-up');
 
 Route::get('/', function () {
     $short_codes = \App\Link::inRandomOrder()->limit(5)->pluck('short_code');
@@ -42,7 +40,6 @@ Route::get('/all_links', function () {
 
     return view('all_links', ['title' => 'All Links', 'short_codes' => $short_codes]);
 });
-
 
 Route::get('/r/{code}', function ($code, \App\IpAdapterInterface $ipAdapter, \App\UserAgentAdapterInterface $UAadapter) {
 
@@ -72,7 +69,6 @@ Route::get('/r/{code}', function ($code, \App\IpAdapterInterface $ipAdapter, \Ap
 
 //    dd($statistic);
     return redirect($link->source_link);
-
 });
 
 //todo: Роут на страницу опций, где переключать адаптеры, после авторизации
