@@ -31,7 +31,7 @@ Route::post('/sign-up', '\App\Http\Controllers\SignUpController@handle')->name('
 Route::get('/', function () {
     $short_codes = \App\Link::inRandomOrder()->limit(5)->pluck('short_code');
     return view('welcome', ['title' => 'Random Links', 'short_codes' => $short_codes]);
-});
+})->name('home');;
 
 Route::get('/all_links', function () {
     $short_codes = cache()->remember('all-short-link', 86400, function (){
