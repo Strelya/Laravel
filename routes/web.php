@@ -34,7 +34,9 @@ Route::get('/', function () {
 })->name('home');;
 
 Route::get('/all_links', function () {
+//    cache()->forget('all-short-link');
     $short_codes = cache()->remember('all-short-link', 86400, function (){
+
         return \App\Link::pluck('short_code');
     });
 
