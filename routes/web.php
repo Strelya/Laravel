@@ -28,6 +28,14 @@ App::singleton(\App\UserAgentAdapterInterface::class, function () {
 Route::get('/sign-up', '\App\Http\Controllers\SignUpController@index')->name('sign-up');
 Route::post('/sign-up', '\App\Http\Controllers\SignUpController@handle')->name('handle-sign-up');
 
+Route::get('/users', '\App\Http\Controllers\UserController@index')->name('users.index');
+Route::get('/users/create', '\App\Http\Controllers\UserController@create')->name('users.create');
+Route::post('/users', '\App\Http\Controllers\UserController@store')->name('users.store');
+Route::get('/users/{user}', '\App\Http\Controllers\UserController@show')->name('users.show');
+Route::get('/users/{user}/edit', '\App\Http\Controllers\UserController@edit')->name('users.edit');
+Route::match(['put', 'patch'], '/users/{user}/edit', '\App\Http\Controllers\UserController@update')->name('users.update');
+Route::delete('/users/{user}', '\App\Http\Controllers\UserController@destroy')->name('users.destroy');
+
 Route::get('/', function () {
     $short_codes = \App\Link::inRandomOrder()->limit(5)->pluck('short_code');
     return view('welcome', ['title' => 'Random Links', 'short_codes' => $short_codes]);
