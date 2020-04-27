@@ -7,12 +7,12 @@ use Illuminate\Http\Request;
 
 class SignUpController
 {
-    public function index()
+    public function login()
     {
-        return view('sign-up');
+        return view('login');
     }
 
-    public function handle(Request $request)
+    public function register(Request $request)
     {
         $request->validate([
             'email' => 'required|email|unique:users,email',

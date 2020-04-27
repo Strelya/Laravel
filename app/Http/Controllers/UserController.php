@@ -7,7 +7,7 @@ namespace App\Http\Controllers;
 class UserController
 {
     public function index(){
-        dd('!!!');
+        return view('admin.users.index', ['title' => 'Users', 'users' => \App\User::paginate(5)]);
     }
     public function create(){
 

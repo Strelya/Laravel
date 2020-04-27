@@ -25,8 +25,10 @@ App::singleton(\App\UserAgentAdapterInterface::class, function () {
     return new \App\ZareiAdapter();
 });
 
-Route::get('/sign-up', '\App\Http\Controllers\SignUpController@index')->name('sign-up');
-Route::post('/sign-up', '\App\Http\Controllers\SignUpController@handle')->name('handle-sign-up');
+//Route::get('/sign-up', '\App\Http\Controllers\SignUpController@index')->name('sign-up');
+//Route::post('/sign-up', '\App\Http\Controllers\SignUpController@handle')->name('handle-sign-up');
+Route::post('/login', '\App\Http\Controllers\SignUpController@login')->name('login');
+Route::post('/register', '\App\Http\Controllers\SignUpController@register')->name('register');
 
 Route::get('/users', '\App\Http\Controllers\UserController@index')->name('users.index');
 Route::get('/users/create', '\App\Http\Controllers\UserController@create')->name('users.create');
