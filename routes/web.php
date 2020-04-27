@@ -41,7 +41,7 @@ Route::delete('/users/{user}', '\App\Http\Controllers\UserController@destroy')->
 Route::get('/', function () {
     $short_codes = \App\Link::inRandomOrder()->limit(5)->pluck('short_code');
     return view('welcome', ['title' => 'Random Links', 'short_codes' => $short_codes]);
-})->name('home');;
+})->name('home');
 
 Route::get('/all_links', function () {
 //    cache()->forget('all-short-link');
@@ -82,6 +82,3 @@ Route::get('/r/{code}', function ($code, \App\IpAdapterInterface $ipAdapter, \Ap
 //    dd($statistic);
     return redirect($link->source_link);
 });
-
-//todo: Роут на страницу опций, где переключать адаптеры, после авторизации
-//todo: На странице опций варианты авторизации - стандартная, гитхаб, Твиттер, Гугл
