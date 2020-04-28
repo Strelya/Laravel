@@ -59,6 +59,9 @@ class UserController
 
     public function destroy(User $user)
     {
+        $user->delete();
 
+        return redirect()->route("users.index")
+            ->with('message', 'User ' . $user->name . ' was deleted');
     }
 }
